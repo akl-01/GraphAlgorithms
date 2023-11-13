@@ -24,7 +24,7 @@ class GraphRepresent:
                     if vertex_1 not in self.graph_dict[vertex_2]:
                         self.graph_dict[vertex_2].append(vertex_1)
                     if vertex_2 not in self.graph_dict[vertex_1]:
-                        self.graph_dict[vertex_1].append[vertex_2]
+                        self.graph_dict[vertex_1].append(vertex_2)
 
     def neighbors(self, vertex: int):
         return self.graph_dict[vertex]
