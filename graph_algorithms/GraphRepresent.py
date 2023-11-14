@@ -26,12 +26,12 @@ class GraphRepresent:
                     if vertex_2 not in self.graph_dict[vertex_1]:
                         self.graph_dict[vertex_1].append(vertex_2)
 
-    def neighbors(self, vertex: int):
+    def neighbors(self, vertex: str):
         return self.graph_dict[vertex]
 
     @property
     def vertices(self):
-        return [int(vertex) for vertex in self.graph_dict.keys()]
+        return [vertex for vertex in self.graph_dict.keys()]
     
     @property
     def number_vertex(self):
