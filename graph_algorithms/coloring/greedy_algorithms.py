@@ -15,9 +15,11 @@ def greedy_graph_coloring(graph: GraphRepresent):
             color += 1
 
     for vertex in graph.vertices:
-        if colors[vertex] is None:
-            colors[vertex] = get_vertex_color(graph.neighbors(vertex))
+        colors[vertex] = get_vertex_color(graph.neighbors(vertex))
     
     coloring_wrapper = ColoringWrapper(colors)
     return coloring_wrapper
 
+def sort_by_smallest_degree_graph_coloring():
+    pass
+    
