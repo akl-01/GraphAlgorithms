@@ -12,3 +12,11 @@ class ColoringWrapper:
     @property
     def colors_vertices(self):
         return self._colors_vertices
+
+class CliqueWrapper:
+    def __init__(self, clique: list):
+        self._clique = clique
+    
+    @property
+    def clique_size(self):
+        return len(self._clique)

@@ -1,13 +1,18 @@
 import time
 from pathlib import Path
+import pandas as pd
 
 from graph_algorithms.GraphRepresent import GraphRepresent
 from graph_algorithms.coloring.greedy_algorithms import (greedy_graph_coloring, 
-                                                           sort_by_smallest_degree_graph_coloring)
+                                                           smallest_degree_sorting_coloring)
 
 def print_result(result: dict):
-    for key, value in result.items():
-        print("{}    {}".format(key, value))
+    indexes = list(result.keys())
+    color_amount = [list(result.values())[i][1] for i in range(len(result))]
+    times = [list(result.values())[i][0] for i in range(len(result))]
+    result_df = pd.DataFrame({"amount_color": color_amount, "time": times}, index=indexes)
+    result_df.to_excel("results/coloring.xlsx")
+    print(result_df)
 
 def main():
     test_files = [
@@ -39,7 +44,7 @@ def main():
             coloring_wrapper = greedy_function(graph_represent)
             total_coloring_time += time.time() - start_coloring_time
 
-            tests_result[test_file] = total_coloring_time
+            tests_result[test_file] = [total_coloring_time, coloring_wrapper.amount_colors]
     print_result(tests_result)
     
 

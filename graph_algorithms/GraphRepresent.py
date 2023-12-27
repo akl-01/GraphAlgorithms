@@ -8,6 +8,7 @@ class GraphRepresent:
         if not isinstance(file, Path):
             raise TypeError("{} file need to be a Path type".format(file))
         self.read(file)
+        self.degrees = {str(v): len(self.graph_dict[v]) for v in self.vertices}
 
     def read(self, file: Path):
         edge_pattern = r'e \d+ \d+'
@@ -28,6 +29,16 @@ class GraphRepresent:
 
     def neighbors(self, vertex: str):
         return self.graph_dict[vertex]
+    
+    def drop_vertex(self, vertex: str) -> list:
+        _vertices = self.vertices
+        for v in _vertices:
+            if vertex in self.graph_dict[v]:
+                self.graph_dict[v].remove(vertex)
+                self.degrees[v] -= 1
+        del self.graph_dict[vertex]
+        del self.degrees[vertex]
+
 
     @property
     def vertices(self):
@@ -43,5 +54,18 @@ class GraphRepresent:
         for vertex in self.graph_dict.keys():
             _number_edges += len(self.graph_dict[vertex])
         
-        return _number_edges // 2
+        return _number_edges // 2 
     
+    def sorting_by_degree(self):
+        self.degrees = dict(sorted(self.degrees.items(), key=lambda item: item[1]))
+    
+    @property
+    def vertex_degrees(self):
+        return self.degrees
+
+    @property
+    def min_degree(self):
+        key = list(self.degrees.keys())[0]
+        value = self.degrees[key]
+        return key, value
+
